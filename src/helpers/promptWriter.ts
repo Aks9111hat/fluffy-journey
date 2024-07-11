@@ -1,11 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_AI_GEMINI_KEY!);
 
-// Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_GEMINI_KEY!);
-
-export const run = async () => {
-    // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+export const promptWriter = async () => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+
 
     const prompt = "Write a story about a vatican city of horrors."
 

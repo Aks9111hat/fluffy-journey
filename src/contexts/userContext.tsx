@@ -5,6 +5,7 @@ import axios from 'axios';
 
 interface User {
     _id: string;
+    email:string;
     // add other fields as per your user data
 }
 
@@ -22,7 +23,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         try {
             const res = await axios.get('/api/users/me');
             if(res.data.success){
-                setUser(res.data.data);
+                console.log(res.data)
+                setUser(res.data.data);                
             }else{
                 setUser(null)
             }

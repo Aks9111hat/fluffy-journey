@@ -13,10 +13,17 @@ export async function POST(request: NextRequest) {
 
         //check if user already exists
         const user = await User.findOne({ email })
+        const user2 = await User.findOne({ username })
+
 
         if (user) {
             return NextResponse.json({ message: "User already exists", success: false }, { status: 200 })
         }
+
+        if (user2) {
+            return NextResponse.json({ message: "Username already exists", success: false }, { status: 200 })
+        }
+
 
         //hash password
         const salt = await bcryptjs.genSalt(10)

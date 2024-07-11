@@ -1,0 +1,58 @@
+import mongoose from "mongoose";
+
+const userDetailSchema = new mongoose.Schema({
+    email : {
+        type: String,
+        required: [true,"Please provide a Email"],
+        unique: true,
+    },
+    dateOfBirth : {
+        type: Date,
+        required: [true,"Please provide Date of birth"],
+    },    
+    gender : {
+        type: String,
+        required: [true,"Please provide a gender"],
+    },
+    height : {
+        type: Number,
+        required: [true,"Please provide Height"],
+    },    
+    weight : {
+        type: Number,
+        required: [true,"Please provide Weight"],
+    },    
+    bmi : {
+        type: Number,
+        required: [true,"Please provide Weight"],
+    },    
+    country : {
+        type: String,
+        required: [true,"Please provide a country"],
+    },
+    noOfMeals : {
+        type: Number,
+        required: [true,"Please provide Number of Meals"],
+    },    
+    userHealthGoal : {
+        type: String,
+        required: [true,"Please provide Health Goal"],
+    },
+    dietTypePreference : {
+        type: String,
+        required: [true,"Please provide a diet type"],
+    },
+    exerciseFrequency : {
+        type: Number,
+        required: [true,"Please provide a exercise frequency"],
+    },
+    medicalHistory : {
+        type: String,
+        required: false,
+    },
+    
+})
+
+const userDetail = mongoose.models.userDetails || mongoose.model("userDetails",userDetailSchema)
+
+export default userDetail;
