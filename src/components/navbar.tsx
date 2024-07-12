@@ -24,7 +24,6 @@ export default function Navbar() {
     }
 
     const navSignup = () => {
-        console.log("sign rpoter")
         router.push('/signup');
     }
     const navLogin = () => {

@@ -50,7 +50,10 @@ const userDetailSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    
+    profilePicture: {
+        type: String, // Store path to the image file
+        required: false,
+    },
 })
 
 const userDetail = mongoose.models.userDetails || mongoose.model("userDetails",userDetailSchema)
