@@ -53,12 +53,12 @@ export default function UserProfile({ params }: any) {
             {userDetails ? (
                 <div className="flex flex-col gap-4 p-6 bg-white shadow-lg rounded-lg">
                     <img src={userDetails.profilePicture || userDetails.gender == 'female' ? '/images/profileWoman.png' : '/images/profileMan.png'} alt="Profile Picture" className="w-32 h-32 rounded-full object-cover" />
-                    {/* <img src={userDetails.profilePicture || '/defaultProfile.png'} alt="Profile Picture" className="w-32 h-32 rounded-full object-cover" /> */}
                     <p><strong>Email:</strong> {userDetails.email}</p>
-                    <p><strong>Date of Birth:</strong> {userDetails.dateOfBirth}</p>
+                    <p><strong>Date of Birth:</strong> {userDetails.dateOfBirth ? new Date(userDetails.dateOfBirth).toISOString().split('T')[0] : ""}</p>
                     <p><strong>Gender:</strong> {userDetails.gender}</p>
                     <p><strong>Height:</strong> {userDetails.height}</p>
                     <p><strong>Weight:</strong> {userDetails.weight}</p>
+                    <p><strong>BMI:</strong> {Math.round(userDetails.bmi*100)/100}</p>
                     <p><strong>Country:</strong> {userDetails.country}</p>
                     <p><strong>Number of Meals:</strong> {userDetails.noOfMeals}</p>
                     <p><strong>Health Goal:</strong> {userDetails.userHealthGoal}</p>

@@ -3,28 +3,29 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useUser } from "@/contexts/userContext";
+
 
 export default function ProfilePage() {
     const [data, setData] = useState("nothing");
     const [aiResponse, setAiResponse] = useState("Hi I am Google AI");
     const [userPrompt, setUserPrompt] = useState({
+        email: "",
         userprompt: "",
     });
+    const { user } = useUser();
+
     const getPrompt = async () => {
         console.log(userPrompt)
-        if (userPrompt.userprompt != "") {
-            console.log(userPrompt)
-            setAiResponse("Loading...");
-            try {
-                const response = await axios.post('/api/genai/promptWriter', userPrompt);
-                setAiResponse(response.data.prompt);
-            } catch (error) {
-                console.log(error);
-                setAiResponse("Error loading prompt");
-            }
-        } else {
-            setAiResponse("No Prompt Provided");
-            toast.error("You Did not ask ai")
+        console.log(userPrompt)
+        setAiResponse("Loading...");
+        try {
+            const response = await axios.post('/api/genai/dietPlanGenerator', userPrompt);
+            setAiResponse(response.data.prompt);
+            toast.success(response.data.message)
+        } catch (error) {
+            console.log(error);
+            setAiResponse("Error loading prompt");
         }
     }
 
@@ -34,9 +35,13 @@ export default function ProfilePage() {
     }
 
     useEffect(() => {
-        getUserDetails();
+        if (user) {
+            setData(user._id)
+            setUserPrompt({ ...userPrompt, email: user.email })
+        }
+        // getUserDetails();
         // getPrompt();
-    }, [])
+    }, [user])
 
     return (
         <div
@@ -53,8 +58,8 @@ export default function ProfilePage() {
                 type="text"
                 id="AskAI"
                 value={userPrompt.userprompt}
-                onChange={(e) => setUserPrompt({ userprompt: e.target.value})}
-            placeholder="Ask AI"
+                onChange={(e) => setUserPrompt({ ...userPrompt, userprompt: e.target.value })}
+                placeholder="Ask AI"
             />
             <button
                 onClick={getPrompt}
