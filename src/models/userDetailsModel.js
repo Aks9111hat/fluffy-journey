@@ -54,6 +54,22 @@ const userDetailSchema = new mongoose.Schema({
         type: String, // Store path to the image file
         required: false,
     },
+    fitnessLevel: { 
+        type: String, 
+        required: [true,"Please provide your fitness levels"] 
+    },
+    preferredWorkoutType: { 
+        type: String, 
+        required: [true,"Please provide your preferred workout"] 
+    },
+    timeAvailability: { 
+        type: String, 
+        required: [true,"Please provide your Time available per day for workout"] 
+    },
+    equipmentAvailable: { 
+        type: String, 
+        required: [true,"Please provide your Equipments available to you"] 
+    },
 })
 
 const userDetail = mongoose.models.userDetails || mongoose.model("userDetails",userDetailSchema)

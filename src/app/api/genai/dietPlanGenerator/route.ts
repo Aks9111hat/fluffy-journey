@@ -13,6 +13,7 @@ const dietPlanGenerator = async (userPrompt: any) => {
     const result = await model.generateContent(userPrompt);
     const response = await result.response;
     const text = await response.text();
+    // console.log(text)
     return text;
 };
 
@@ -92,12 +93,15 @@ export async function POST(request: NextRequest) {
         `;
 
         const text = await dietPlanGenerator(prompt);
+        console.log(text)
 
         // const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
         // Regular expression to extract JSON
         const startIndex = text.indexOf('{');
         const endIndex = text.lastIndexOf('}');
         const cleanedText = text.substring(startIndex, endIndex + 1);
+        // console.log(text)
+        console.log(cleanedText)
 
         // Ensure the response is valid JSON
         let jsonResponse;

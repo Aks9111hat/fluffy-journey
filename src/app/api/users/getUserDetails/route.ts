@@ -8,11 +8,7 @@ export async function POST(request: NextRequest) {
         const {
             email
         } = reqBody;
-        console.log(email)
-
         const user = await UserDetails.findOne({ email });
-        console.log(user)
-
 
         if (user) {
             return NextResponse.json({ message: "Details Retrieved Successfull", success: true, userDetails: user }, { status: 200 });

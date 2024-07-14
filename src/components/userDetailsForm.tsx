@@ -11,6 +11,19 @@ const UserDetailsForm = () => {
     const router = useRouter();
     const { user } = useUser();
     const [profilePicture, setProfilePicture] = useState<File | null>(null);
+    const [countries, setCountries] = useState<string[]>([]);
+    useEffect(() => {
+        // Fetch country options from an API
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get("https://restcountries.com/v3.1/all");
+                setCountries(response.data.map((country: any) => country.name.common));
+            } catch (error) {
+                console.error("Error fetching countries:", error);
+            }
+        };
+        fetchCountries();
+    }, []);
 
     const formik = useFormik({
         initialValues: {
@@ -26,6 +39,10 @@ const UserDetailsForm = () => {
             exerciseFrequency: "",
             medicalHistory: "",
             profilePicture: "",
+            fitnessLevel: "",
+            preferredWorkoutType: "",
+            timeAvailability: "",
+            equipmentAvailable: "",
         },
         validationSchema: Yup.object({
             dateOfBirth: Yup.date().required("Please provide Date of birth"),
@@ -37,6 +54,10 @@ const UserDetailsForm = () => {
             userHealthGoal: Yup.string().required("Please provide Health Goal"),
             dietTypePreference: Yup.string().required("Please provide a diet type"),
             exerciseFrequency: Yup.number().required("Please provide a exercise frequency"),
+            fitnessLevel: Yup.string().required("Please provide your fitness levels"),
+            preferredWorkoutType: Yup.string().required("Please provide your preferred workout"),
+            timeAvailability: Yup.string().required("Please provide your Time available per day for workout"),
+            equipmentAvailable: Yup.string().required("Please provide your Equipments available to you"),
         }),
 
         onSubmit: async (values) => {
@@ -56,16 +77,16 @@ const UserDetailsForm = () => {
 
     useEffect(() => {
         if (user) {
-            formik.setFieldValue("email", user.email);           
+            formik.setFieldValue("email", user.email);
         }
     }, [user]);
 
-    useEffect(() => {       
-        if (user) {       
-           const getUserDetails = async ()=>{
-               const reqBody = { email: user.email };
+    useEffect(() => {
+        if (user) {
+            const getUserDetails = async () => {
+                const reqBody = { email: user.email };
                 try {
-                    const response = await axios.post('/api/users/getUserDetails', reqBody);                    
+                    const response = await axios.post('/api/users/getUserDetails', reqBody);
                     if (response.data.success) {
                         toast.success(response.data.message);
                         const { dateOfBirth, ...userDetails } = response.data.userDetails;
@@ -81,7 +102,7 @@ const UserDetailsForm = () => {
                     toast.error(error.message);
                 }
             }
-            getUserDetails();            
+            getUserDetails();
         }
     }, [user]);
 
@@ -153,15 +174,21 @@ const UserDetailsForm = () => {
             </div>
             <div>
                 <label htmlFor="country">Country</label>
-                <input
+                <select
                     id="country"
                     name="country"
-                    type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.country}
                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
-                />
+                >
+                    <option value="">Select Country</option>
+                    {countries.map((country, index) => (
+                        <option key={index} value={country}>
+                            {country}
+                        </option>
+                    ))}
+                </select>
                 {formik.touched.country && formik.errors.country ? (
                     <div className="text-red-500">{formik.errors.country}</div>
                 ) : null}
@@ -183,30 +210,40 @@ const UserDetailsForm = () => {
             </div>
             <div>
                 <label htmlFor="userHealthGoal">Health Goal</label>
-                <input
+                <select
                     id="userHealthGoal"
                     name="userHealthGoal"
-                    type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.userHealthGoal}
                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
-                />
+                >
+                    <option value="">Select Health Goal</option>
+                    <option value="Weight Loss">Weight Loss</option>
+                    <option value="Muscle Gain">Muscle Gain</option>
+                    <option value="Build Endurance">Build Endurance</option>
+                    <option value="General Fitness">General Fitness</option>
+                </select>
                 {formik.touched.userHealthGoal && formik.errors.userHealthGoal ? (
                     <div className="text-red-500">{formik.errors.userHealthGoal}</div>
                 ) : null}
             </div>
             <div>
-                <label htmlFor="dietTypePreference">Diet Type</label>
-                <input
+                <label htmlFor="dietTypePreference">Diet Type Preference</label>
+                <select
                     id="dietTypePreference"
                     name="dietTypePreference"
-                    type="text"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.dietTypePreference}
                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
-                />
+                >
+                    <option value="">Select Diet Type</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Both veg & non-veg">Both veg & non-veg</option>
+                </select>
                 {formik.touched.dietTypePreference && formik.errors.dietTypePreference ? (
                     <div className="text-red-500">{formik.errors.dietTypePreference}</div>
                 ) : null}
@@ -238,6 +275,79 @@ const UserDetailsForm = () => {
                 />
                 {formik.touched.medicalHistory && formik.errors.medicalHistory ? (
                     <div className="text-red-500">{formik.errors.medicalHistory}</div>
+                ) : null}
+            </div>
+            <div>
+                <label htmlFor="fitnessLevel">Fitness Level</label>
+                <select
+                    id="fitnessLevel"
+                    name="fitnessLevel"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.fitnessLevel}
+                    className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                >
+                    <option value="">Select Fitness Level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                {formik.touched.fitnessLevel && formik.errors.fitnessLevel ? (
+                    <div className="text-red-500">{formik.errors.fitnessLevel}</div>
+                ) : null}
+            </div>
+            <div>
+                <label htmlFor="preferredWorkoutType">Preferred Workout Type</label>
+                <select
+                    id="preferredWorkoutType"
+                    name="preferredWorkoutType"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.preferredWorkoutType}
+                    className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                >
+                    <option value="">Select Workout Type</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="Strength Training">Strength Training</option>
+                    <option value="Flexibility">Flexibility</option>
+                    <option value="Mixed">Mixed</option>
+                </select>
+                {formik.touched.preferredWorkoutType && formik.errors.preferredWorkoutType ? (
+                    <div className="text-red-500">{formik.errors.preferredWorkoutType}</div>
+                ) : null}
+            </div>
+            <div>
+                <label htmlFor="timeAvailability">Time Availability (minutes per day)</label>
+                <input
+                    id="timeAvailability"
+                    name="timeAvailability"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.timeAvailability}
+                    className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                />
+                {formik.touched.timeAvailability && formik.errors.timeAvailability ? (
+                    <div className="text-red-500">{formik.errors.timeAvailability}</div>
+                ) : null}
+            </div>
+            <div>
+                <label htmlFor="equipmentAvailable">Equipment Available</label>
+                <select
+                    id="equipmentAvailable"
+                    name="equipmentAvailable"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.equipmentAvailable}
+                    className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
+                >
+                    <option value="">Select Equipment</option>
+                    <option value="Gym Equipment">Gym Equipment</option>
+                    <option value="Home Equipment">Home Equipment</option>
+                    <option value="No Equipment">No Equipment</option>
+                </select>
+                {formik.touched.equipmentAvailable && formik.errors.equipmentAvailable ? (
+                    <div className="text-red-500">{formik.errors.equipmentAvailable}</div>
                 ) : null}
             </div>
             {/* <div>

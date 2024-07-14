@@ -21,7 +21,11 @@ export async function POST(request: NextRequest) {
             dietTypePreference,
             exerciseFrequency,
             medicalHistory,
-            profilePicture
+            profilePicture,
+            fitnessLevel,
+            preferredWorkoutType,
+            timeAvailability,
+            equipmentAvailable,
         } = reqBody;
 
         const user = await UserDetails.findOne({ email });
@@ -41,6 +45,10 @@ export async function POST(request: NextRequest) {
             user.exerciseFrequency = exerciseFrequency;
             user.medicalHistory = medicalHistory;
             user.profilePicture = profilePicture;
+            user.fitnessLevel = fitnessLevel;
+            user.preferredWorkoutType = preferredWorkoutType;
+            user.timeAvailability = timeAvailability;
+            user.equipmentAvailable = equipmentAvailable;
 
             const updatedUser = await user.save();
             return NextResponse.json({ message: "User Details Updated", success: true, updatedUser }, { status: 200 });
@@ -60,6 +68,10 @@ export async function POST(request: NextRequest) {
             exerciseFrequency: exerciseFrequency,
             medicalHistory: medicalHistory,
             profilePicture: profilePicture,
+            fitnessLevel: fitnessLevel,
+            preferredWorkoutType: preferredWorkoutType,
+            timeAvailability: timeAvailability,
+            equipmentAvailable: equipmentAvailable,
         });
 
         const savedUser = await newUser.save();
