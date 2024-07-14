@@ -15,7 +15,8 @@ export default function ProfilePage() {
         userprompt: "",
     });
     const { user } = useUser();
-
+    
+    //dead code:
     const getPrompt = async () => {
         console.log(userPrompt)
         console.log(userPrompt)
@@ -30,18 +31,11 @@ export default function ProfilePage() {
         }
     }
 
-    const getUserDetails = async () => {
-        const res = await axios.get('/api/users/me');
-        setData(res.data.data._id);
-    }
-
     useEffect(() => {
         if (user) {
             setData(user._id)
             setUserPrompt({ ...userPrompt, email: user.email })
         }
-        // getUserDetails();
-        // getPrompt();
     }, [user])
 
     return (
@@ -52,6 +46,7 @@ export default function ProfilePage() {
             <p>Profile Page</p>
             <h2 className="p-4 rounded bg-green-400">{data === 'nothing' ? 'Nothing' : <Link href={`/profile/${data}`}>Your Profile</Link>}</h2>
             <hr />
+            {/* Dead Code */}
             <h2 className="p-4 rounded bg-green-400">{aiResponse}</h2>
             <label htmlFor="Ask AI">Ask AI</label>
             <input

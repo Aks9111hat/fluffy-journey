@@ -15,9 +15,14 @@ const UserWorkoutInfo: React.FC<WorkoutPlanProps> = ({ email }) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post('/api/users/savePlan', { email: email, dietPlan: "", workoutPlan: "" });
-            setUserDetails(response.data.updatedUser);
+            const response = await axios.post('/api/users/savePlan', { email: email});
+            if (response.data.success && response.data.updatedUser.workoutPlan){
+            setUserDetails(response.data.updatedUser.workoutPlan);
             toast.success(response.data.message);
+        }else{
+            setError("No Workout Plan Found");
+            toast.error("No Workout Plan found")
+            }
         } catch (error: any) {
             setError(error.message);
             toast.error(error.message);
@@ -41,7 +46,7 @@ const UserWorkoutInfo: React.FC<WorkoutPlanProps> = ({ email }) => {
                 <div>
                     <h3>Workout Plan:</h3>
                     <div>
-                        {Object.entries(userDetails.workoutPlan.weekly_workout_plan).map(([day, plan]: any) => (
+                        {Object.entries(userDetails.weekly_workout_plan).map(([day, plan]: any) => (
                             <div key={day}>
                                 <h4>{day}</h4>
                                 <p>Warmup: {plan.warmup.exercise} for {plan.warmup.duration}, Calories: {plan.warmup.calories}</p>

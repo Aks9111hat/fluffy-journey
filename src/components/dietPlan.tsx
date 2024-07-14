@@ -1,3 +1,5 @@
+//Component to render Diet plan (It requires email in the prop)
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -15,11 +17,16 @@ const UserDetailsInfo: React.FC<DietPlanProps> = ({ email }) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post('/api/users/savePlan', { email: email, dietPlan: "", workoutPlan: "" });
-            setUserDetails(response.data.updatedUser);
-            toast.success(response.data.message);
+            const response = await axios.post('/api/users/savePlan', { email: email });
+            if (response.data.success && response.data.updatedUser.dietPlan) {
+                setUserDetails(response.data.updatedUser.dietPlan);
+                toast.success(response.data.message);
+            } else {
+                setError("No Diet Plan Found");
+                toast.error("No Diet Plan found")
+            }
         } catch (error: any) {
-            setError(error.message);
+            setError("Diet Plan Not Found");
             toast.error(error.message);
         } finally {
             setLoading(false);
@@ -41,7 +48,7 @@ const UserDetailsInfo: React.FC<DietPlanProps> = ({ email }) => {
                 <div>
                     <h3>Diet Plan:</h3>
                     <div>
-                        {Object.entries(userDetails.dietPlan.daily_diet_plan).map(([meal, details]: any) => (
+                        {Object.entries(userDetails.daily_diet_plan).map(([meal, details]: any) => (
                             <div key={meal}>
                                 <h4>{meal}</h4>
                                 <p>Dish: {details.dish}</p>
