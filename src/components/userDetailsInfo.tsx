@@ -1,13 +1,41 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+
 interface UserDetailsProps {
-    userDetails: any;
+    email: string;
 }
 
+const UserDetailsInfo: React.FC<UserDetailsProps> = ({ email }) => {
+    const [userDetails, setUserDetails] = useState<any>(null);
+    const [reqBody, setReqBody] = useState({
+        email: email
+    });
 
-const UserDetailsInfo: React.FC<UserDetailsProps> = ({ userDetails }) => {
+    const getUserDetails = async () => {
+        try {
+            const response = await axios.post('/api/users/getUserDetails', reqBody);
+            setUserDetails(response.data.userDetails);
+            toast.success(response.data.message);
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (reqBody.email) {
+            getUserDetails();
+        }
+    }, [reqBody]);
+
+    if (!userDetails) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <div className="flex flex-col gap-4 p-6 bg-white shadow-lg rounded-lg">
             <img
-                src={userDetails.profilePicture || userDetails.gender === 'female' ? '/images/profileWoman.png' : '/images/profileMan.png'}
+                src={userDetails.profilePicture || (userDetails.gender === 'female' ? '/images/profileWoman.png' : '/images/profileMan.png')}
                 alt="Profile Picture"
                 className="w-32 h-32 rounded-full object-cover"
             />

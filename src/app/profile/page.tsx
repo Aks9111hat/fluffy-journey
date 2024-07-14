@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useUser } from "@/contexts/userContext";
-
+import DietPlan from "@/components/dietPlan"
+import WorkoutPlan from "@/components/workoutPlan"
 
 export default function ProfilePage() {
     const [data, setData] = useState("nothing");
@@ -67,6 +68,8 @@ export default function ProfilePage() {
             >
                 Get Prompts
             </button>
+            {/* <DietPlan email={user?.email}/>
+            <WorkoutPlan email={user?.email}/> */}
         </div>
     )
 }

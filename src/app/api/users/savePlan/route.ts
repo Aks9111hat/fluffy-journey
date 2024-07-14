@@ -13,11 +13,7 @@ export async function POST(request: NextRequest) {
             dietPlan,
             workoutPlan,
         } = reqBody;
-
         const user = await UserPlans.findOne({ email });
-        console.log(email)
-        console.log(dietPlan)
-        console.log(workoutPlan)
 
         if (user) {
             let updatedUser = user
@@ -40,6 +36,7 @@ export async function POST(request: NextRequest) {
             dietPlan: dietPlan,
             workoutPlan: workoutPlan,
         });
+
 
         const savedUser = await newUser.save();
 
