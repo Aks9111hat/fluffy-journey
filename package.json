@@ -12,6 +12,7 @@
     "@edgestore/react": "^0.1.7",
     "@edgestore/server": "^0.1.7",
     "@google/generative-ai": "^0.14.1",
+    "@heroicons/react": "^2.1.5",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "formidable": "^3.5.1",

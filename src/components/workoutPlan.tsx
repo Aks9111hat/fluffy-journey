@@ -6,7 +6,7 @@ interface WorkoutPlanProps {
     email: any;
 }
 
-const UserWorkoutInfo: React.FC<WorkoutPlanProps> = ({ email }) => {
+const UserWorkoutPlan: React.FC<WorkoutPlanProps> = ({ email }) => {
     const [userDetails, setUserDetails] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -15,13 +15,13 @@ const UserWorkoutInfo: React.FC<WorkoutPlanProps> = ({ email }) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post('/api/users/savePlan', { email: email});
-            if (response.data.success && response.data.updatedUser.workoutPlan){
-            setUserDetails(response.data.updatedUser.workoutPlan);
-            toast.success(response.data.message);
-        }else{
-            setError("No Workout Plan Found");
-            toast.error("No Workout Plan found")
+            const response = await axios.post('/api/users/getPlans', { email: email });
+            if (response.data.success && response.data.userPlans.workoutPlan) {
+                setUserDetails(response.data.userPlans.workoutPlan);
+                toast.success(response.data.message);
+            } else {
+                setError("No Workout Plan Found");
+                toast.error("No Workout Plan found")
             }
         } catch (error: any) {
             setError(error.message);
@@ -69,4 +69,4 @@ const UserWorkoutInfo: React.FC<WorkoutPlanProps> = ({ email }) => {
     );
 };
 
-export default UserWorkoutInfo;
+export default UserWorkoutPlan;

@@ -8,7 +8,7 @@ interface DietPlanProps {
     email: any;
 }
 
-const UserDetailsInfo: React.FC<DietPlanProps> = ({ email }) => {
+const UserDietPlan: React.FC<DietPlanProps> = ({ email }) => {
     const [userDetails, setUserDetails] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -17,13 +17,13 @@ const UserDetailsInfo: React.FC<DietPlanProps> = ({ email }) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post('/api/users/savePlan', { email: email });
-            if (response.data.success && response.data.updatedUser.dietPlan) {
-                setUserDetails(response.data.updatedUser.dietPlan);
+            const response = await axios.post('/api/users/getPlans', { email: email });
+            if (response.data.success && response.data.userPlans.dietPlan) {
+                setUserDetails(response.data.userPlans.dietPlan);
                 toast.success(response.data.message);
             } else {
                 setError("No Diet Plan Found");
-                toast.error("No Diet Plan found")
+                toast.error(response.data.message)
             }
         } catch (error: any) {
             setError("Diet Plan Not Found");
@@ -63,4 +63,4 @@ const UserDetailsInfo: React.FC<DietPlanProps> = ({ email }) => {
     );
 };
 
-export default UserDetailsInfo;
+export default UserDietPlan;
