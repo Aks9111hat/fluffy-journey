@@ -29,7 +29,7 @@ const UserDetailsInfo: React.FC<UserDetailsProps> = ({ email }) => {
     }, [reqBody]);
 
     if (!userDetails) {
-        return <p>Loading...</p>;
+        return <p>Please update your details to view your profile information.</p>;
     }
 
     return (

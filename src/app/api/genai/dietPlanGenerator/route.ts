@@ -6,21 +6,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_GEMINI_KEY!);
 
 const dietPlanGenerator = async (userPrompt: any) => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-    // const refinedPrompt = await promptRefiner(userPrompt);
-    // console.log(refinedPrompt);
-
-    // const result = await model.generateContent(refinedPrompt);
     const result = await model.generateContent(userPrompt);
-    const response = await result.response;
-    const text = await response.text();
-    // console.log(text)
-    return text;
-};
-
-const promptRefiner = async (prompt: any) => {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-    const promptToGenerator = `Please Write a proper prompt such that Gemini AI will give the result I want for the following user Prompt: '''${prompt}'''`;
-    const result = await model.generateContent(promptToGenerator);
     const response = await result.response;
     const text = await response.text();
     return text;
@@ -57,39 +43,76 @@ export async function POST(request: NextRequest) {
 
             The response should be a valid JSON object without any code block formatting, formatted as follows:
             {
-             "daily_diet_plan": {
-                 "meal_1": {
-                    "dish": "Oatmeal with Fresh Berries",
-                    "amount": "200 grams",
-                    "calories": 300
+                "daily_diet_plan": {
+                    "meal_1": {
+                        "dish": "Oatmeal with Fresh Berries",
+                        "amount": "200 grams",
+                        "calories": 300,
+                        "nutrients": {
+                            "protein": "10 grams",
+                            "carbohydrates": "50 grams",
+                            "fat": "5 grams",
+                            "fiber": "8 grams"
+                        }
                     },
-                "meal_2": {
-                    "dish": "Grilled Chicken Salad",
-                    "amount": "300 grams",
-                    "calories": 400
+                    "meal_2": {
+                        "dish": "Grilled Chicken Salad",
+                        "amount": "300 grams",
+                        "calories": 400,
+                        "nutrients": {
+                            "protein": "30 grams",
+                            "carbohydrates": "15 grams",
+                            "fat": "18 grams",
+                            "fiber": "5 grams"
+                        }
                     },
-                "meal_3": {
-                    "dish": "Quinoa and Vegetable Stir-fry",
-                    "amount": "250 grams",
-                    "calories": 350
+                    "meal_3": {
+                        "dish": "Quinoa and Vegetable Stir-fry",
+                        "amount": "250 grams",
+                        "calories": 350,
+                        "nutrients": {
+                            "protein": "12 grams",
+                            "carbohydrates": "60 grams",
+                            "fat": "10 grams",
+                            "fiber": "7 grams"
+                        }
                     },
-                "meal_4": {
-                    "dish": "Greek Yogurt with Honey",
-                    "amount": "150 grams",
-                    "calories": 200
+                    "meal_4": {
+                        "dish": "Greek Yogurt with Honey",
+                        "amount": "150 grams",
+                        "calories": 200,
+                        "nutrients": {
+                            "protein": "10 grams",
+                            "carbohydrates": "25 grams",
+                            "fat": "5 grams",
+                            "fiber": "0 grams"
+                        }
                     },
-                "meal_5": {
-                    "dish": "Grilled Salmon with Steamed Broccoli",
-                    "amount": "250 grams",
-                    "calories": 500
+                    "meal_5": {
+                        "dish": "Grilled Salmon with Steamed Broccoli",
+                        "amount": "250 grams",
+                        "calories": 500,
+                        "nutrients": {
+                            "protein": "35 grams",
+                            "carbohydrates": "10 grams",
+                            "fat": "30 grams",
+                            "fiber": "5 grams"
+                        }
                     },
-                "meal_6": {
-                    "dish": "Mixed Nuts",
-                    "amount": "50 grams",
-                    "calories": 150
+                    "meal_6": {
+                        "dish": "Mixed Nuts",
+                        "amount": "50 grams",
+                        "calories": 150,
+                        "nutrients": {
+                            "protein": "5 grams",
+                            "carbohydrates": "8 grams",
+                            "fat": "13 grams",
+                            "fiber": "3 grams"
+                        }
                     }
                 }
             }
+
         `;
 
         const text = await dietPlanGenerator(prompt);
