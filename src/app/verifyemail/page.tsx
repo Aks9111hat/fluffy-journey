@@ -2,7 +2,6 @@
 import axios from "axios"
 import Link from "next/link"
 import React, { useEffect, useState } from 'react';
-import Footer from "@/components/Footer";
 
 
 export default function VerifyEmailPage() {
@@ -37,7 +36,6 @@ export default function VerifyEmailPage() {
     }, [token]);
 
     return (
-        <div>
             <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100 px-4 sm:px-6 lg:px-8">
                 <div className="w-full space-y-8">
                     <div className="text-center">
@@ -66,7 +64,5 @@ export default function VerifyEmailPage() {
                     )}
                 </div>
             </div>
-            <Footer />
-        </div>
     );
 }

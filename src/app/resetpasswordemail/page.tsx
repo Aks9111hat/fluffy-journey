@@ -2,7 +2,6 @@
 
 "use client"
 import Loader from "@/components/Loader";
-import Footer from "@/components/Footer";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -39,7 +38,6 @@ export default function ResetPassword() {
     }
 
     return (
-        <div>
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
             {!sent ? (
                 <div className="max-w-md w-full space-y-8">
@@ -93,8 +91,6 @@ export default function ResetPassword() {
                     </p>
                 </div>
             )}
-        </div>
-        <Footer />
         </div>
     );
 }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
 import Navbar from "@/components/Navbar";
+import Footer from '@/components/Footer'
 import { UserProvider } from '@/contexts/userContext';
 
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <UserProvider>
           <Navbar />
           {children}
+          <Footer />
           <Toaster />
         </UserProvider>
       </body>

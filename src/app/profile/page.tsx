@@ -6,7 +6,7 @@ import { useUser } from "@/contexts/userContext";
 import DietPlan from "@/components/dietPlan"
 import WorkoutPlan from "@/components/workoutPlan"
 import GenerateDietPlan from "@/components/dietPlanGeneratorUI";
-// import GenerateWorkoutPlan from "@/components/workoutPlanGeneratorUI";
+import GenerateWorkoutPlan from "@/components/workoutPlanGeneratorUI";
 
 export default function ProfilePage() {
     const [data, setData] = useState("nothing");
@@ -27,10 +27,11 @@ export default function ProfilePage() {
             <h2 className="p-4 rounded bg-green-400">{data === 'nothing' ? 'Nothing' : <Link href={`/profile/${data}`}>Your Profile</Link>}</h2>
             <hr />
             
-            <DietPlan email={user?.email}/>
-            {/* <WorkoutPlan email={user?.email}/> */}
-            <GenerateDietPlan email={user?.email}/>
-            {/* <GenerateWorkoutPlan email={user?.email}/> */}
+            {/* <DietPlan email={user?.email}/>
+            <GenerateDietPlan email={user?.email}/> */}
+
+            <WorkoutPlan email={user?.email}/>
+            <GenerateWorkoutPlan email={user?.email}/>
         </div>
     )
 }

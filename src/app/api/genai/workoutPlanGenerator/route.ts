@@ -12,23 +12,27 @@ const workoutPlanGenerator = async (userPrompt: any) => {
     return text;
 };
 
+
 function sanitizeJSONResponse(text: string): string {
     // Remove any leading/trailing text that isn't part of the JSON
     const startIndex = text.indexOf('{');
     const endIndex = text.lastIndexOf('}');
     const cleanedText = text.substring(startIndex, endIndex + 1);
 
-    // Fix common JSON formatting issues
     const sanitizedText = cleanedText
-        .replace(/"(?:reps|sets|duration|calories)":\s*"([^"]*)\s*/g, '": "$1')
-        .replace(/-\s*(\d+)/g, '-$1') // Correct the range values
-        .replace(/(\w+)"\s*:\s*"(\d+)/g, '$1": $2') // Remove extra quotes around numeric values
-        .replace(/":\s*"([^"]*)",/g, '": "$1",') // Ensure values are quoted properly
-        .replace(/"\s*:\s*as\s*many\s*as\s*possible/g, '": "as many as possible') // Fix "as many as possible" string
+        .replace(/":\s*as\s*many\s*as\s*possible/g, '": "as many as possible"') // Fix "as many as possible" string
+        .replace(/"reps":\s*Max/g, '"reps": "Max"'); // Fix Max value for reps
+    // Fix common JSON formatting issues
+    // const sanitizedText = cleanedText
+    //     .replace(/""/g, '"') // Remove duplicate double quotes
+    //     .replace(/(\w+)"\s*:\s*(\d+)\s*minutes/g, '"$1": "$2 minutes"') // Add quotes around duration values with time units
+    //     .replace(/"\s*:\s*([^"]+)(?=\s*,|\s*\})/g, '": "$1"') // Ensure all values are properly quoted
+    //     .replace(/":\s*as\s*many\s*as\s*possible/g, '": "as many as possible"') // Fix "as many as possible" string
+    //     .replace(/"reps":\s*Max/g, '"reps": "Max"'); // Fix Max value for reps
 
-    // return sanitizedText;
-    return cleanedText;
+    return sanitizedText;
 }
+
 
 export async function POST(request: NextRequest) {
     try {
@@ -124,12 +128,13 @@ The response should be a valid JSON object without any code block formatting, fo
 
         const text = await workoutPlanGenerator(prompt);
         const cleanedText = sanitizeJSONResponse(text);
-
+        console.log(cleanedText)
         // Ensure the response is valid JSON
         let jsonResponse;
         try {
             jsonResponse = JSON.parse(cleanedText);
         } catch (error) {
+
             return NextResponse.json({ error: "Failed to parse JSON response", details: text }, { status: 500 });
         }
 

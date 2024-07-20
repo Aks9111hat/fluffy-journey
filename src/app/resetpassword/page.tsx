@@ -1,6 +1,5 @@
 "use client";
 import Loader from "@/components/Loader";
-import Footer from "@/components/Footer";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from 'react';
@@ -37,7 +36,6 @@ export default function ResetPasswordPage() {
     }, []);
 
     return (
-        <div>
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
             {!resetDone ? (
                 <div className="max-w-md w-full space-y-8">
@@ -92,8 +90,6 @@ export default function ResetPasswordPage() {
                     </Link>
                 </div>
             )}
-        </div>
-        <Footer />
         </div>
     );
 }

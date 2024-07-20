@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from '@/components/ComponentLoader';
-import Footer from "@/components/Footer";
 import Logo from '@/components/logo';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
@@ -54,7 +53,6 @@ export default function SignupPage() {
     }, [user]);
 
     return (
-        <div>
         <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div>
@@ -159,8 +157,6 @@ export default function SignupPage() {
                     </div>
                 )}
             </div>
-        </div>
-        <Footer />
         </div>
     );
 }

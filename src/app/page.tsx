@@ -6,7 +6,7 @@ import Features2 from '@/components/features2';
 import CTA from '@/components/cta';
 import Steps from '@/components/Steps';
 import Contact from '@/components/contact';
-import Footer from '@/components/Footer'
+// import Footer from '@/components/Footer'
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
       <Features2 />
       <Steps />
       <Contact />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
