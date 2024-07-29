@@ -44,19 +44,19 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-4">
                     <Logo />
                     <div className="hidden md:flex gap-3 lg:gap-4">
-                        <Link href="/" className="text-neutral-800 hover:text-blue-700">
+                        <Link href="/" className="text-neutral-800 font-semibold hover:text-blue-700">
                             Home
                         </Link>
-                        <Link href="/" className="text-neutral-800 hover:text-blue-700">
+                        <Link href="/profile/generateDietPlan" className="text-neutral-800 font-semibold hover:text-blue-700">
                             Diet Plans
                         </Link>
-                        <Link href="/" className="text-neutral-800 hover:text-blue-700">
+                        <Link href="/profile/generateWorkoutPlan" className="text-neutral-800 font-semibold hover:text-blue-700">
                             Workout Plans
                         </Link>
-                        <Link href="/" className="text-neutral-800 hover:text-blue-700">
+                        <Link href="/" className="text-neutral-800 font-semibold hover:text-blue-700">
                             Success Stories
                         </Link>
-                        <Link href="/" className="text-neutral-800 hover:text-blue-700">
+                        <Link href="/" className="text-neutral-800 font-semibold hover:text-blue-700">
                             Contact Us
                         </Link>
                     </div>
@@ -156,19 +156,19 @@ const Navbar: React.FC = () => {
             {isMobileMenuOpen && (
                 <div className="md:hidden flex flex-col mt-4 gap-8">
                     <div className="flex flex-col">
-                        <Link href="/" className="text-neutral-800 py-2 hover:text-blue-700" onClick={toggleMobileMenu}>
+                        <Link href="/" className="text-neutral-800 py-2 font-semibold hover:text-blue-700" onClick={toggleMobileMenu}>
                             Home
                         </Link>
-                        <Link href="/" className="text-neutral-800 py-2 hover:text-blue-700" onClick={toggleMobileMenu}>
+                        <Link href="/profile/generateDietPlan" className="text-neutral-800 py-2 font-semibold hover:text-blue-700" onClick={toggleMobileMenu}>
                             Diet Plans
                         </Link>
-                        <Link href="/" className="text-neutral-800 py-2 hover:text-blue-700" onClick={toggleMobileMenu}>
+                        <Link href="/profile/generateWorkoutPlan" className="text-neutral-800 py-2 font-semibold hover:text-blue-700" onClick={toggleMobileMenu}>
                             Workout Plans
                         </Link>
-                        <Link href="/" className="text-neutral-800 py-2 hover:text-blue-700" onClick={toggleMobileMenu}>
+                        <Link href="/" className="text-neutral-800 py-2 font-semibold hover:text-blue-700" onClick={toggleMobileMenu}>
                             Success Stories
                         </Link>
-                        <Link href="/" className="text-neutral-800 py-2 hover:text-blue-700" onClick={toggleMobileMenu}>
+                        <Link href="/" className="text-neutral-800 py-2 font-semibold hover:text-blue-700" onClick={toggleMobileMenu}>
                             Contact Us
                         </Link>
                     </div>

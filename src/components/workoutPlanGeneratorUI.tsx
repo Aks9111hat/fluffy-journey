@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import Loader from "@/components/Loader";
+
 
 interface WorkoutPlanProps {
     email: any;
@@ -87,7 +89,7 @@ const GenerateWorkoutPlan: React.FC<WorkoutPlanProps> = ({ email }) => {
     return (
         <div className="flex flex-col gap-4 p-6 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold">Workout Plan Component</h2>
-            {loading && <p>Loading...</p>}
+            {loading && <p className="flex text-center"><Loader /></p>}
             {error && <p className="text-red-500">Error: {error}</p>}
             <textarea
                 value={userPrompt}

@@ -21,7 +21,8 @@ function sanitizeJSONResponse(text: string): string {
 
     const sanitizedText = cleanedText
         .replace(/":\s*as\s*many\s*as\s*possible/g, '": "as many as possible"') // Fix "as many as possible" string
-        .replace(/"reps":\s*Max/g, '"reps": "Max"'); // Fix Max value for reps
+        .replace(/"reps":\s*Max/g, '"reps": "Max"') // Fix Max value for reps
+        .replace(/(\w+)"\s*:\s*(\d+)\s*minutes/g, '"$1": "$2 minutes"') // Add quotes around duration values with time units
     // Fix common JSON formatting issues
     // const sanitizedText = cleanedText
     //     .replace(/""/g, '"') // Remove duplicate double quotes

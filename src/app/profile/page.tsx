@@ -27,11 +27,14 @@ export default function ProfilePage() {
             <h2 className="p-4 rounded bg-green-400">{data === 'nothing' ? 'Nothing' : <Link href={`/profile/${data}`}>Your Profile</Link>}</h2>
             <hr />
             
-            {/* <DietPlan email={user?.email}/>
-            <GenerateDietPlan email={user?.email}/> */}
+            <div className="flex flex-row ">
+            <DietPlan email={user?.email}/>
+            {/* <GenerateDietPlan email={user?.email}/> */}
 
             <WorkoutPlan email={user?.email}/>
-            <GenerateWorkoutPlan email={user?.email}/>
+            </div>
+            
+            {/* <GenerateWorkoutPlan email={user?.email}/> */}
         </div>
     )
 }
