@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import Loader from "@/components/Loader";
+import Loader from "@/components/Loaders/Loader";
 
 
 interface WorkoutPlanProps {

@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/Loader";
+import Loader from "@/components/Loaders/Loader";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from 'react';
@@ -72,7 +72,7 @@ export default function ResetPasswordPage() {
                                 disabled={loading}
                                 className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-stone-700 hover:bg-stone-800'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                             >
-                                {loading ? <Loader/> : "Reset Password"}
+                                {loading ? <Loader /> : "Reset Password"}
                             </button>
                         </div>
                     </form>
@@ -84,7 +84,7 @@ export default function ResetPasswordPage() {
                         Your password has been reset. You can now log in with your new password.
                     </p>
                     <Link href="/login">
-                            <button className="mt-4 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-stone-700 hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button className="mt-4 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-stone-700 hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Go to Login
                         </button>
                     </Link>

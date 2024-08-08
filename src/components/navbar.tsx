@@ -1,5 +1,5 @@
 "use client";
-import Logo from "@/components/logo";
+import Logo from "@/components/DisplayComponents/logo";
 import { useUser } from "@/contexts/userContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
                         //     LogOut
                         // </button>
                         <motion.button
-                                onClick={logout}
+                            onClick={logout}
                             className="relative py-1 px-5 text-myWebBlue border-2 border-myWebBlue overflow-hidden hover:text-white hover:border-black"
                             whileHover="hover"
                         >
@@ -220,27 +220,27 @@ const Navbar: React.FC = () => {
                                 </motion.button>
                             </>
                         ) : (
-                                <motion.button
-                                    onClick={logout}
-                                    className="relative py-1 px-5 text-myWebBlue border-2 border-myWebBlue overflow-hidden hover:text-white hover:border-black"
-                                    whileHover="hover"
-                                >
-                                    <span className="relative z-10">LogOut</span>
-                                    <motion.div
-                                        className="absolute inset-0 z-0"
-                                        initial={{ width: '0%' }}
-                                        variants={{
-                                            hover: {
-                                                width: '100%',
-                                                transition: {
-                                                    duration: 0.5,
-                                                    ease: 'easeInOut',
-                                                },
+                            <motion.button
+                                onClick={logout}
+                                className="relative py-1 px-5 text-myWebBlue border-2 border-myWebBlue overflow-hidden hover:text-white hover:border-black"
+                                whileHover="hover"
+                            >
+                                <span className="relative z-10">LogOut</span>
+                                <motion.div
+                                    className="absolute inset-0 z-0"
+                                    initial={{ width: '0%' }}
+                                    variants={{
+                                        hover: {
+                                            width: '100%',
+                                            transition: {
+                                                duration: 0.5,
+                                                ease: 'easeInOut',
                                             },
-                                        }}
-                                        style={{ backgroundColor: 'black', originX: 0 }}
-                                    />
-                                </motion.button>
+                                        },
+                                    }}
+                                    style={{ backgroundColor: 'black', originX: 0 }}
+                                />
+                            </motion.button>
                         )}
                     </div>
 

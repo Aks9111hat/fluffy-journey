@@ -3,7 +3,7 @@
 import {  useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/userContext";
-import UserDetailsInfo from "@/components/userDetailsInfo";
+import UserDetailsInfo from "@/components/DisplayComponents/userDetailsInfo";
 
 export default function UserProfile({ params }: any) {
     const router = useRouter();

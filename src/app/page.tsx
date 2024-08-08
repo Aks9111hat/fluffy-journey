@@ -1,11 +1,11 @@
 "use client"
 
-import Hero from '@/components/Hero';
-import Features1 from '@/components/features1';
-import Features2 from '@/components/features2';
-import CTA from '@/components/cta';
-import Steps from '@/components/Steps';
-import Contact from '@/components/contact';
+import Hero from '@/components/DisplayComponents/Hero';
+import Features1 from '@/components/DisplayComponents/features1';
+import Features2 from '@/components/DisplayComponents/features2';
+import CTA from '@/components/DisplayComponents/cta';
+import Steps from '@/components/DisplayComponents/Steps';
+import Contact from '@/components/DisplayComponents/contact';
 // import Footer from '@/components/Footer'
 
 const Home = () => {

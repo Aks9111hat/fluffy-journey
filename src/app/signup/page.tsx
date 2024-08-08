@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Loader from '@/components/ComponentLoader';
-import Logo from '@/components/logo';
+import Loader from '@/components/Loaders/ComponentLoader';
+import Logo from '@/components/DisplayComponents/logo';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export default function SignupPage() {

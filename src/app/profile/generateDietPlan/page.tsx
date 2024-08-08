@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useUser } from "@/contexts/userContext";
-import GenerateDietPlan from "@/components/dietPlanGeneratorUI";
+import GenerateDietPlan from "@/components/FunctionalComponents/dietPlanGeneratorUI";
 
 export default function ProfilePage() {
     const [data, setData] = useState("nothing");
-    const { user } = useUser();  
-    
+    const { user } = useUser();
+
     useEffect(() => {
         if (user) {
             setData(user._id)
@@ -17,7 +17,7 @@ export default function ProfilePage() {
     return (
         <div
             className="flex flex-col items-center justify-center min-h-screen py-2">
-            <GenerateDietPlan email={user?.email}/>
+            <GenerateDietPlan email={user?.email} />
         </div>
     )
 }

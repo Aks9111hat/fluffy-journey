@@ -1,7 +1,7 @@
 
 
 "use client"
-import Loader from "@/components/Loader";
+import Loader from "@/components/Loaders/Loader";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -31,9 +31,9 @@ export default function ResetPassword() {
 
     if (loading) {
         return (
-        <div className="flex flex-col justify-center items-center min-h-screen">
-        <Loader />
-        </div>
+            <div className="flex flex-col justify-center items-center min-h-screen">
+                <Loader />
+            </div>
         );
     }
 

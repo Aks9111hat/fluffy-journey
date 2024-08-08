@@ -1,7 +1,7 @@
 // pages/details.tsx
 
 "use client";
-import UserDetailsForm from "@/components/userDetailsForm";
+import UserDetailsForm from "@/components/FunctionalComponents/userDetailsForm";
 
 export default function UserDetails() {
     return (
